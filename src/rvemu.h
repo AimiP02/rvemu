@@ -43,10 +43,40 @@
 /*
     State
 */
+enum exit_reason_t {
+  none,
+  direct_branch,
+  indirect_branch,
+  ecall,
+};
+
 typedef struct {
+  enum exit_reason_t exit_reason;
   u64 gp_regs[32];
   u64 pc;
 } state_t;
+
+/*
+    Instruction
+*/
+
+enum inst_type_t {
+  inst_addi,
+  num_insts,
+};
+
+typedef struct {
+  i8 rd;
+  i8 rs1;
+  i8 rs2;
+  i32 imm;
+  enum inst_type_t type;
+  bool rvc;
+  bool cont;
+} inst_t;
+
+void inst_decode(inst_t *inst, u32 data);
+void exec_block_interp(state_t *state);
 
 /*
     MMU
@@ -69,3 +99,4 @@ typedef struct {
 } machine_t;
 
 void machine_load_program(machine_t *m, char *prog);
+enum exit_reason_t machine_step(machine_t *m);

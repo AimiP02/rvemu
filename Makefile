@@ -3,6 +3,7 @@ SRCS = $(wildcard src/*.c)
 HDRS = $(wildcard src/*.h)
 OBJS = $(patsubst src/%.c, obj/%.o, $(SRCS))
 CC = clang
+CFLAGS += -g
 
 rvemu: $(OBJS)
 	$(CC) $(CFLAGS) -lm -o $@ $^ $(LDFLAGS)

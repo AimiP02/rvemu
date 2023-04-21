@@ -39,10 +39,10 @@ static void mmu_load_segment(mmu_t *mmu, elf64_phdr_t *phdr, int fd) {
   u64 mem_size = phdr->p_memsz + (vaddr - aligned_addr);
   int prot = flag_to_mmap_prot(phdr->p_flags);
 
-  printf(
-      "offset: 0x%lx, vaddr: 0x%lx, aligned_addr: 0x%lx, file_size: 0x%lx,"
-      " mem_size: 0x%lx, prot: %d\n",
-      offset, vaddr, aligned_addr, file_size, mem_size, prot);
+  // printf(
+  //     "offset: 0x%lx, vaddr: 0x%lx, aligned_addr: 0x%lx, file_size: 0x%lx,"
+  //     " mem_size: 0x%lx, prot: %d\n",
+  //     offset, vaddr, aligned_addr, file_size, mem_size, prot);
 
   u64 addr =
       (u64)mmap((void *)aligned_addr, file_size, prot, MAP_PRIVATE | MAP_FIXED,
