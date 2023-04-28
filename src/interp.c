@@ -1,9 +1,36 @@
-#include "reg.h"
 #include "rvemu.h"
 
 typedef void(func_t)(state_t *, inst_t *);
 
-static func_t *funcs[4] = {};
+static void func_empty(state_t *state, inst_t *inst) {
+  state->exit_reason = ecall;
+}
+
+static func_t *funcs[] = {
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty, func_empty, func_empty, func_empty, func_empty, func_empty,
+    func_empty,
+};
 
 void exec_block_interp(state_t *state) {
   static inst_t inst = {0};
